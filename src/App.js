@@ -20,6 +20,7 @@ class App extends Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getRooms.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   componentDidMount() {
@@ -87,6 +88,18 @@ class App extends Component {
     })
   }
 
+  createRoom(roomName) {
+    this.currentUser.createRoom({
+      name: roomName
+    })
+    .then(room => {
+      this.subscribeToRoom(room.id)
+    })
+    .catch(err => {
+      console.log("ERROR create new room: ", err);
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -96,7 +109,7 @@ class App extends Component {
           roomId={ this.state.roomId }/>
         <MessageList messages={ this.state.messages }/>
         <SendMessageForm sendMessage={ this.sendMessage }/>
-        <NewRoomForm />
+        <NewRoomForm createRoom={ this.createRoom }/>
       </div>
     );
   }
