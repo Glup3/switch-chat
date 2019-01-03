@@ -20,8 +20,8 @@ class MessageList extends Component {
     if (!this.props.roomId) {
       return (
         <div className="message-list">
-          <div>
-            Join a room!
+          <div className="join-room">
+            &larr; Join a room!
           </div>
         </div>
       )
@@ -37,9 +37,6 @@ class MessageList extends Component {
         </div>
       )
     }
-
-
-    
   }
 }
 

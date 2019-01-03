@@ -27,7 +27,7 @@ class NewRoomForm extends Component {
 
   render() {
     return (
-      <div className="">
+      <div className="new-room-form">
         <form>
           <input onChange={ this.handleChange } value={ this.state.roomName } type="text" placeholder="Create a room" required />
           <button id="create-room-btn" type="submit">+</button>
