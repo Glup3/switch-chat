@@ -90,7 +90,10 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <RoomList rooms={ [...this.state.joinableRooms, ...this.state.joinedRooms] } subscribeToRoom={ this.subscribeToRoom }/>
+        <RoomList 
+          rooms={ [...this.state.joinableRooms, ...this.state.joinedRooms] } 
+          subscribeToRoom={ this.subscribeToRoom }
+          roomId={ this.state.roomId }/>
         <MessageList messages={ this.state.messages }/>
         <SendMessageForm sendMessage={ this.sendMessage }/>
         <NewRoomForm />
