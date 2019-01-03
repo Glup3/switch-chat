@@ -17,15 +17,29 @@ class MessageList extends Component {
   }
 
   render() {
-    return (
-      <div className="message-list">
-        { this.props.messages.map((message, index) => {
-          return (
-            <Message key={ index } username={ message.senderId } text={ message.text }/> 
-          )
-        }) }
-      </div>
-    )
+    if (!this.props.roomId) {
+      return (
+        <div className="message-list">
+          <div>
+            Join a room!
+          </div>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="message-list">
+          { this.props.messages.map((message, index) => {
+            return (
+              <Message key={ index } username={ message.senderId } text={ message.text }/> 
+            )
+          }) }
+        </div>
+      )
+    }
+
+
+    
   }
 }
 

@@ -29,7 +29,7 @@ class SendMessageForm extends Component {
     return (
       <div className="">
         <form onSubmit={ this.handleSubmit }>
-          <input placeholder="Type your message and hit ENTER" type="text" onChange={ this.handleChange } value={ this.state.message }/>
+          <input disabled={ this.props.disabled } placeholder="Type your message and hit ENTER" type="text" onChange={ this.handleChange } value={ this.state.message }/>
         </form>
       </div>
     )
