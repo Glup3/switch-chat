@@ -4,23 +4,16 @@ import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import RoomList from './RoomList';
 import NewRoomForm from './NewRoomForm';
+import TypingIndicator from './TypingIndicator'
 import { tokenUrl, instanceLocator } from '../config';
 
 class ChatScreen extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      roomId: null,
-      messages: [],
-      joinableRooms: [],
-      joinedRooms: [],
-    }
-
-    this.sendMessage = this.sendMessage.bind(this);
-    this.subscribeToRoom = this.subscribeToRoom.bind(this);
-    this.getRooms = this.getRooms.bind(this);
-    this.createRoom = this.createRoom.bind(this);
+  state = {
+    roomId: null,
+    messages: [],
+    joinableRooms: [],
+    joinedRooms: [],
+    usersWhoAreTyping: []
   }
 
   componentDidMount() {
@@ -42,7 +35,19 @@ class ChatScreen extends Component {
     })
   }
 
-  getRooms() {
+  sendTypingEvent = () => {
+    console.log(this.state);
+    this.currentUser
+      .isTypingIn({
+        roomId: this.state.roomId
+      })
+      .catch(err => {
+        console.log('ERROR typing', err);
+      })
+    
+  }
+
+  getRooms = () => {
     this.currentUser.getJoinableRooms()
       .then(joinableRooms => {
         this.setState({
@@ -55,7 +60,7 @@ class ChatScreen extends Component {
       })
   }
 
-  subscribeToRoom(roomId) {
+  subscribeToRoom = (roomId) => {
     this.setState({
       messages: []
     })
@@ -67,7 +72,20 @@ class ChatScreen extends Component {
           this.setState({
             messages: [...this.state.messages, message]
           })
+        },
+        onUserStartedTyping: user => {
+          this.setState({
+            usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
+          })
+        },
+        onUserStoppedTyping: user => {
+          this.setState({
+            usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+              username => username !== user.name
+            )
+          })
         }
+
       }
     })
     .then(room => {
@@ -81,14 +99,14 @@ class ChatScreen extends Component {
     })
   }
 
-  sendMessage(text) {
+  sendMessage = (text) => {
     this.currentUser.sendMessage({
       text: text,
       roomId: this.state.roomId
     })
   }
 
-  createRoom(roomName) {
+  createRoom = (roomName) => {
     this.currentUser.createRoom({
       name: roomName
     })
@@ -108,7 +126,8 @@ class ChatScreen extends Component {
           subscribeToRoom={ this.subscribeToRoom }
           roomId={ this.state.roomId }/>
         <MessageList messages={ this.state.messages } roomId={ this.state.roomId }/>
-        <SendMessageForm sendMessage={ this.sendMessage } disabled={!this.state.roomId}/>
+        <TypingIndicator usersWhoAreTyping={ this.state.usersWhoAreTyping }/>
+        <SendMessageForm sendMessage={ this.sendMessage } disabled={!this.state.roomId} onChange={ this.sendTypingEvent }/>
         <NewRoomForm createRoom={ this.createRoom }/>
       </div>
     );

@@ -3,16 +3,12 @@ import UsernameForm from './components/UsernameForm'
 import ChatScreen from './components/ChatScreen'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      currentUsername: '',
-     currentScreen: 'WhatIsYourUsernameScreen'
-    }
-    this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
- }
+  state = {
+    currentUsername: '',
+    currentScreen: 'WhatIsYourUsernameScreen'
+  }
 
-  onUsernameSubmitted(username) {
+  onUsernameSubmitted = (username) => {
     fetch('http://localhost:3001/users', {
       method: 'POST',
       headers: {

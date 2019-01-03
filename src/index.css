@@ -23,14 +23,18 @@ html, body {
   display: grid;
   height: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
+  grid-template-rows: 1fr 1fr 1fr 1fr 30px 60px;
   grid-template-areas: 
       "r m m m m m"
       "r m m m m m"
       "r m m m m m"
       "r m m m m m"
-      "r m m m m m"
+      "r t t t t t"
       "n s s s s s";
+}
+
+.typing-indicator {
+  grid-area: t;
 }
 
 .new-room-form {
@@ -73,14 +77,19 @@ html, body {
   color: var(--secondary-color);
 }
 
-.rooms-list .room a {
+.rooms-list .room button {
   color: var(--secondary-text-color);
   font-weight: 600;
   text-decoration: none;
-  
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
 }
 
-.rooms-list .room.active a {
+.rooms-list .room.active button {
   color: var(--secondary-color);
 }
 
