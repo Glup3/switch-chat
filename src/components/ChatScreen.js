@@ -5,7 +5,6 @@ import SendMessageForm from './SendMessageForm';
 import RoomList from './RoomList';
 import NewRoomForm from './NewRoomForm';
 import TypingIndicator from './TypingIndicator'
-import { tokenUrl, instanceLocator } from '../config';
 
 class ChatScreen extends Component {
   state = {
@@ -18,10 +17,10 @@ class ChatScreen extends Component {
 
   componentDidMount() {
     const chatManager = new Chatkit.ChatManager({
-      instanceLocator: instanceLocator,
+      instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
       userId: this.props.currentUsername,
       tokenProvider: new Chatkit.TokenProvider({
-        url: tokenUrl
+        url: process.env.REACT_APP_TOKEN_URL
       })
     })
 
@@ -36,7 +35,6 @@ class ChatScreen extends Component {
   }
 
   sendTypingEvent = () => {
-    console.log(this.state);
     this.currentUser
       .isTypingIn({
         roomId: this.state.roomId

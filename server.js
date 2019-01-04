@@ -2,12 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const Chatkit = require('@pusher/chatkit-server')
+require('dotenv').config();
 
 const app = express()
 
 const chatkit = new Chatkit.default({
-  instanceLocator: "",
-  key: "",
+  instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
+  key: process.env.REACT_APP_SECRET_KEY,
 })
 
 app.use(bodyParser.urlencoded({ extended: false }))
