@@ -1,8 +1,8 @@
 :root {
-  --main-color: #5ea3d0;
+  --main-color: #30BCED;
   --secondary-color: white;
   --main-text-color: #3e5869;
-  --secondary-text-color: #b0c7d6;
+  --secondary-text-color: #303036;
   --send-message-form: #F5F5F5;
 }
 
@@ -10,7 +10,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: system-ui;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 200;
   color: 	#3e5869; 
 }
@@ -74,7 +74,7 @@ html, body {
 
 .rooms-list h3 {
   margin: 5px 0;
-  color: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 
 .rooms-list .room button {
@@ -150,6 +150,10 @@ html, body {
   display: inline;
   padding: 4px 8px;
   border-radius: 8px;
+}
+
+.message .color {
+  background: orange;
 }
 
 .message-list {

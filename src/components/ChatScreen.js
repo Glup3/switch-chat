@@ -125,7 +125,7 @@ class ChatScreen extends Component {
           rooms={ [...this.state.joinableRooms, ...this.state.joinedRooms] } 
           subscribeToRoom={ this.subscribeToRoom }
           roomId={ this.state.roomId }/>
-        <MessageList messages={ this.state.messages } roomId={ this.state.roomId }/>
+        <MessageList messages={ this.state.messages } roomId={ this.state.roomId } user={ this.currentUser }/>
         <TypingIndicator usersWhoAreTyping={ this.state.usersWhoAreTyping }/>
         <SendMessageForm sendMessage={ this.sendMessage } disabled={!this.state.roomId} onChange={ this.sendTypingEvent }/>
         <NewRoomForm createRoom={ this.createRoom }/>

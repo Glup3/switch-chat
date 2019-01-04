@@ -30,9 +30,16 @@ class MessageList extends Component {
       return (
         <div className="message-list">
           { this.props.messages.map((message, index) => {
-            return (
-              <Message key={ index } username={ message.senderId } text={ message.text }/> 
-            )
+            if (this.props.user.encodedId !== message.senderId) {
+              return (
+                <Message key={ index } username={ message.senderId } text={ message.text } other={ 'color' }/> 
+              )
+            }
+            else {
+              return (
+                <Message key={ index } username={ message.senderId } text={ message.text } other={ '' }/> 
+              )
+            }
           }) }
         </div>
       )
